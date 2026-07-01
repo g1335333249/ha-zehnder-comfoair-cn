@@ -1,0 +1,91 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "森德康舒安新风",
+        "description": "选择 Home Assistant 连接 CA-H3-5S 控制模块的方式。",
+        "data": {
+          "connection_type": "连接方式"
+        }
+      },
+      "tcp": {
+        "title": "TCP/IP RS485 网关",
+        "description": "通过 TCP/IP 转 RS485 网关连接。波特率、校验等参数需要与网关的 RS485 侧设置一致。",
+        "data": {
+          "host": "IP 地址或主机名",
+          "tcp_port": "TCP 端口",
+          "slave_id": "Modbus 地址",
+          "baudrate": "波特率",
+          "parity": "校验",
+          "stopbits": "停止位",
+          "bytesize": "数据位"
+        }
+      },
+      "serial": {
+        "title": "本地 USB-RS485 串口",
+        "description": "通过 Home Assistant 主机上的 USB-RS485 串口适配器连接。",
+        "data": {
+          "serial_port": "串口",
+          "slave_id": "Modbus 地址",
+          "baudrate": "波特率",
+          "parity": "校验",
+          "stopbits": "停止位",
+          "bytesize": "数据位"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "无法连接控制器。请检查 RS485 转接器、串口参数和 Modbus 地址。"
+    },
+    "abort": {
+      "already_configured": "该控制器已经配置。"
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "filter_alarm": { "name": "滤网报警" },
+      "antifreeze_alarm": { "name": "防冻报警" }
+    },
+    "button": {
+      "reset_filter_alarm": { "name": "复位滤网报警" }
+    },
+    "fan": {
+      "fan": {
+        "name": "新风机",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "auto": "自动",
+              "fresh_air": "新风",
+              "none": "无",
+              "sleep": "睡眠",
+              "bypass": "旁通",
+              "antifreeze": "防冻"
+            }
+          }
+        }
+      }
+    },
+    "sensor": {
+      "indoor_temperature": { "name": "室内温度" },
+      "indoor_humidity": { "name": "室内湿度" },
+      "outdoor_temperature": { "name": "室外温度" },
+      "pm25": { "name": "PM2.5" },
+      "co2": { "name": "二氧化碳" },
+      "voc": {
+        "name": "VOC",
+        "state": {
+          "excellent": "优",
+          "good": "良",
+          "light": "轻度",
+          "moderate": "中度",
+          "heavy": "重度"
+        }
+      }
+    },
+    "switch": {
+      "boost_relay": { "name": "增压继电器" },
+      "mixed_air_relay": { "name": "混风继电器" }
+    }
+  }
+}

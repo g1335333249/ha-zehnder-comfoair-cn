@@ -1,0 +1,91 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Zehnder ComfoAir CN",
+        "description": "Choose how Home Assistant connects to the CA-H3-5S controller.",
+        "data": {
+          "connection_type": "Connection type"
+        }
+      },
+      "tcp": {
+        "title": "TCP/IP RS485 gateway",
+        "description": "Connect through a TCP/IP to RS485 gateway. The serial settings must match the gateway's RS485 side.",
+        "data": {
+          "host": "IP address or hostname",
+          "tcp_port": "TCP port",
+          "slave_id": "Modbus address",
+          "baudrate": "Baud rate",
+          "parity": "Parity",
+          "stopbits": "Stop bits",
+          "bytesize": "Data bits"
+        }
+      },
+      "serial": {
+        "title": "Local USB-RS485 serial adapter",
+        "description": "Connect through a serial adapter attached to Home Assistant.",
+        "data": {
+          "serial_port": "Serial port",
+          "slave_id": "Modbus address",
+          "baudrate": "Baud rate",
+          "parity": "Parity",
+          "stopbits": "Stop bits",
+          "bytesize": "Data bits"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the controller. Check the RS485 adapter, serial settings, and Modbus address."
+    },
+    "abort": {
+      "already_configured": "This controller is already configured."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "filter_alarm": { "name": "Filter alarm" },
+      "antifreeze_alarm": { "name": "Antifreeze alarm" }
+    },
+    "button": {
+      "reset_filter_alarm": { "name": "Reset filter alarm" }
+    },
+    "fan": {
+      "fan": {
+        "name": "Ventilation",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "auto": "Auto",
+              "fresh_air": "Fresh air",
+              "none": "None",
+              "sleep": "Sleep",
+              "bypass": "Bypass",
+              "antifreeze": "Antifreeze"
+            }
+          }
+        }
+      }
+    },
+    "sensor": {
+      "indoor_temperature": { "name": "Indoor temperature" },
+      "indoor_humidity": { "name": "Indoor humidity" },
+      "outdoor_temperature": { "name": "Outdoor temperature" },
+      "pm25": { "name": "PM2.5" },
+      "co2": { "name": "Carbon dioxide" },
+      "voc": {
+        "name": "VOC",
+        "state": {
+          "excellent": "Excellent",
+          "good": "Good",
+          "light": "Light",
+          "moderate": "Moderate",
+          "heavy": "Heavy"
+        }
+      }
+    },
+    "switch": {
+      "boost_relay": { "name": "Boost relay" },
+      "mixed_air_relay": { "name": "Mixed-air relay" }
+    }
+  }
+}
