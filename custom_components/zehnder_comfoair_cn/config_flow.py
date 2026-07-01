@@ -38,9 +38,9 @@ _LOGGER = logging.getLogger(__name__)
 
 BAUDRATE_OPTIONS = ["4800", "9600", "14400", "19200", "38400"]
 PARITY_OPTIONS = [
-    {"value": "N", "label": "None"},
-    {"value": "E", "label": "Even"},
-    {"value": "O", "label": "Odd"},
+    {"value": "N", "label": "无校验"},
+    {"value": "E", "label": "偶校验"},
+    {"value": "O", "label": "奇校验"},
 ]
 
 
@@ -199,7 +199,13 @@ def _common_schema_fields(current: dict[str, Any] | None = None) -> dict:
     return {
         vol.Required(
             CONF_SLAVE_ID, default=current.get(CONF_SLAVE_ID, DEFAULT_SLAVE_ID)
-        ): vol.All(vol.Coerce(int), vol.Range(min=1, max=247)),
+        ): selector.NumberSelector(
+            selector.NumberSelectorConfig(
+                min=1,
+                max=247,
+                mode=selector.NumberSelectorMode.BOX,
+            )
+        ),
         vol.Required(
             CONF_BAUDRATE, default=str(current.get(CONF_BAUDRATE, DEFAULT_BAUDRATE))
         ): selector.SelectSelector(
